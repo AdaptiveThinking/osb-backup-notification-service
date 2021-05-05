@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Spring boot email template with Thymeleaf</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+
+    <!-- use the font -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+<p th:text="${'The scheduled backup on service instance ' + serviceInstanceId + ' finished with status: ' + jobStatus}"></p>
+<p>Below are more information: </p>
+<table>
+    <tbody>
+    <tr>
+        <td>Date: </td>
+        <td th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></td>
+    </tr>
+    <tr>
+        <td>Service Instance: </td>
+        <td th:text="${serviceInstanceId}"></td>
+    </tr>
+    <tr>
+        <td>Job Type: </td>
+        <td th:text="${jobType}"></td>
+    </tr>
+    <tr>
+        <td>Job Status: </td>
+        <td th:text="${jobStatus}"></td>
+    </tr>
+    <tr>
+        <td>Cause: </td>
+        <td th:text="${cause}"></td>
+    </tr>
+    </tbody>
+</table>
+<p>
+    This is an automatic mail.
+</p>
+</body>
+</html>
