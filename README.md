@@ -10,4 +10,4 @@ An e-mail service working in conjunction with a Kafka server and stored configur
 
 ## Documentation
 
-[Documentation for the notification service.](./src/main/documentation/osb-notification-service-documentation.md)
+[Documentation for the notification service.](./osb-backup-notification-service/src/main/documentation/osb-notification-service-documentation.md)
