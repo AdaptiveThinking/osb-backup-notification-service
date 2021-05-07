@@ -5,6 +5,8 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -25,8 +27,9 @@ public class SMTPConfigRepositoryImpl implements SMTPConfigRepository {
     }
 
     @Override
-    public Map<String, SMTPConfig> findAll() {
-        return hashOperations.entries(CONFIGURATION_SMTP_HASH);
+    public List<SMTPConfig> findAll() {
+        Map<String,SMTPConfig> map = hashOperations.entries(CONFIGURATION_SMTP_HASH);
+        return new ArrayList<>(map.values());
     }
 
     @Override

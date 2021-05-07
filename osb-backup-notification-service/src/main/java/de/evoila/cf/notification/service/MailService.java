@@ -107,11 +107,10 @@ public class MailService {
         properties.put("serviceInstanceId", jobMessage.getServiceInstanceId());
         properties.put("jobStatus", jobMessage.getJobStatus());
         properties.put("jobType", "TODO jobType"); //todo
-        properties.put("cause", jobMessage.getMessage()); //todo
-
+        properties.put("cause", jobMessage.getMessage());
         String subject = "Service Instance " + jobMessage.getServiceInstanceId() + " finished job with status: " + jobMessage.getJobStatus();
 
-        return new Mail("test@somemail.com",
+        return new Mail(emailNotificationConfig.getSendFromEmail(),
                 emailNotificationConfig.getSendToEmail(),
                 subject,
                 new Mail.HtmlTemplate(emailNotificationConfig.getTemplate(), properties));

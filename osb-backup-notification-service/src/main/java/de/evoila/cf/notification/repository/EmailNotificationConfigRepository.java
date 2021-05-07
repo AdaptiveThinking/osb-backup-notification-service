@@ -1,6 +1,8 @@
 package de.evoila.cf.notification.repository;
 
 import de.evoila.cf.notification.model.EmailNotificationConfig;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,8 +13,8 @@ public interface EmailNotificationConfigRepository {
 
     void save(EmailNotificationConfig emailNotificationConfig);
     EmailNotificationConfig findById(String id);
-    Map<String, EmailNotificationConfig> findAll();
-    Map<String, EmailNotificationConfig> findAllByInstance(String instanceId);
+    List<EmailNotificationConfig> findAll();
+    List<EmailNotificationConfig> findAllByInstance(String instanceId);
     void update(EmailNotificationConfig emailNotificationConfig);
     void deleteEmailNotificationConfig(String id);
     void deleteByInstance(String instanceId);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -23,9 +24,9 @@ public class KafkaJobListener {
     @KafkaListener(topics = "backup-job", groupId = "jobMessage_json", containerFactory = "jobMessageKafkaListenerFactory")
     public void listen(JobMessage jobMessage) {
 
-        Map<String, EmailNotificationConfig> emailNotificationConfigMap = emailNotificationConfigRepository.findAllByInstance(jobMessage.getServiceInstanceId());
+        List<EmailNotificationConfig> list = emailNotificationConfigRepository.findAllByInstance(jobMessage.getServiceInstanceId());
 
-        for (EmailNotificationConfig emailNotificationConfig : emailNotificationConfigMap.values()) {
+        for (EmailNotificationConfig emailNotificationConfig : list) {
             if(emailNotificationConfig.getTriggerOn() == jobMessage.getJobStatus()){
                 mailService.sendEmail(emailNotificationConfig, jobMessage);
             }

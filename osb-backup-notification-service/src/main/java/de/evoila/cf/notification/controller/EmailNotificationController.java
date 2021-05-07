@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
 import java.util.Map;
 
 @Api(value = "/emailNotification", description = "Manage how and where e-mail notifications will be sent.")
@@ -34,8 +35,8 @@ public class EmailNotificationController {
 
     @ApiOperation(value = "Add a listener. Notifications will be sent to the specified e-mail when the status appears.")
     @RequestMapping(value = "/emailNotification", method = RequestMethod.GET)
-    public ResponseEntity<Map<String, EmailNotificationConfig>> getAllEmailNotificationConfig() {
-        Map<String, EmailNotificationConfig> allConfigs = emailNotificationConfigRepository.findAll();
+    public ResponseEntity<List<EmailNotificationConfig>> getAllEmailNotificationConfig() {
+        List<EmailNotificationConfig> allConfigs = emailNotificationConfigRepository.findAll();
         if (allConfigs != null)
             return new ResponseEntity<>(allConfigs, HttpStatus.OK);
         else
@@ -68,9 +69,9 @@ public class EmailNotificationController {
 
     @ApiOperation(value = "Get all configured notification settings from the specified instance.")
     @RequestMapping(value = "/emailNotification/byInstance/{instanceID}", method = RequestMethod.GET)
-    public ResponseEntity<Map<String, EmailNotificationConfig>> getConfigurationsByServiceInstance(@PathVariable String instanceID) {
-        Map<String, EmailNotificationConfig> allConfigsByInstance = emailNotificationConfigRepository.findAllByInstance(instanceID);
-        if (allConfigsByInstance != null)
+    public ResponseEntity<List<EmailNotificationConfig>> getConfigurationsByServiceInstance(@PathVariable String instanceID) {
+        List<EmailNotificationConfig> allConfigsByInstance = emailNotificationConfigRepository.findAllByInstance(instanceID);
+        if (allConfigsByInstance.size() != 0)
             return new ResponseEntity<>(allConfigsByInstance, HttpStatus.OK);
         else
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

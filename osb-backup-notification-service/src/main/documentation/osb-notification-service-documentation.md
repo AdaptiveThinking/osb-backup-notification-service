@@ -1,10 +1,31 @@
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Open Service Broker Notification Service](#open-service-broker-notification-service)
+- [Open Service Broker Backup Notification Service](#open-service-broker-backup-notification-service)
+  - [Setup (local)](#setup-local)
   - [Test data](#test-data)
 
-# Open Service Broker Notification Service
+# Open Service Broker Backup Notification Service
+
+## Setup (local)
+
+The Notification Service needs a running Kafka and Redis to connect to. Environment variables need to be set, so that configurations can be downloaded from a cloud config server.
+
+The configuration files (evoila specific) can be found in the bitbucket repository: https://bitbucket.org/evoila-group/hob-cf-service-broker-configuration/src/master/
+
+```
+SPRING_APPLICATION_NAME=FOLDER_NAME;
+SPRING_CONFIG_IMPORT=optional:configserver:https://config-server-test.system.cf.hob.local;
+SPRING_CLOUD_CONFIG_URI=https://config-server-test.system.cf.hob.local;
+SPRING_PROFILES_ACTIVE=FILE_NAMES;
+SPRING_CLOUD_CONFIG_PASSWORD=PASSWORD;
+SPRING_CLOUD_CONFIG_USERNAME=USERNAME;
+```
+
+FOLDER_NAME: e.g. "local", "osb-evoila-test", etc.
+
+FILE_NAMES: can be multiple, like "rabbitmq,mongodb,example". The prefix "application-" in filenames can be ignored. When a file is called "application-kafka.yml", then only "kafka" needs to be specified.
+
 
 ## Test data
 
@@ -36,6 +57,7 @@ POST /emailNotification
     "id":"0",
     "triggerOn":"FAILED",
     "serviceInstanceID":"0101",
+    "sendFromEmail":"EMAIL_ADDRESS",
     "sendToEmail":"EMAIL_ADDRESS",
     "template":"normal",
     "smtpConfigId":"01"
@@ -45,6 +67,7 @@ POST /emailNotification
 4. Create a json object with a kafka producer.
 
 ```json
-{"serviceInstanceId":"0101","jobStatus":"FAILED","message":"The backup failed to execute","errorMessage":"203","startTime":"2021-02-03 10:08:02","endTime":"2021-02-03 10:09:30","executionTime":"9300"}
+{"serviceInstanceId":"0101","jobStatus":"FAILED","message":"The backup failed to execute","errorMessage":"203","startTime":"2021-02-03T10:08:02","endTime":"2021-02-03T10:09:30","executionTime":"9300"}
 ```
+
 

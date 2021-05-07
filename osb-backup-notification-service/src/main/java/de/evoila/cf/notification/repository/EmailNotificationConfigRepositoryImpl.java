@@ -6,6 +6,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,11 +50,16 @@ public class EmailNotificationConfigRepositoryImpl implements EmailNotificationC
 
     @Override
     public EmailNotificationConfig findById(String id) {
-        return findAll().get(id);
+        for(EmailNotificationConfig config : findAll()){
+            if(config.getId().equals(id)){
+                return config;
+            }
+        }
+        return null;
     }
 
     @Override
-    public Map<String, EmailNotificationConfig> findAll() {
+    public List<EmailNotificationConfig> findAll() {
         Set<String> allServiceInstances = setOperations.members(SERVICE_INSTANCE_HASH);
         Map<String, EmailNotificationConfig> allEmailNotifications = null;
 
@@ -66,12 +73,13 @@ public class EmailNotificationConfigRepositoryImpl implements EmailNotificationC
             }
         }
 
-        return allEmailNotifications;
+        return new ArrayList<EmailNotificationConfig>(allEmailNotifications.values());
     }
 
     @Override
-    public Map<String, EmailNotificationConfig> findAllByInstance(String instanceId) {
-        return hashOperations.entries(SERVICE_INSTANCE_HASH + ":" + instanceId);
+    public List<EmailNotificationConfig> findAllByInstance(String instanceId) {
+        Map<String, EmailNotificationConfig> map = hashOperations.entries(SERVICE_INSTANCE_HASH + ":" + instanceId);
+        return new ArrayList<EmailNotificationConfig>(map.values());
     }
 
     @Override

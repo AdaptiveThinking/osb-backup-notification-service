@@ -25,7 +25,7 @@ public class KafkaConfig {
 
     private String topicName = "backup-job";
 
-    @Value("${spring.kafka.consumer.bootstrap-servers}")
+    @Value("${spring.kafka.consumer.bootstrap-servers:localhost:9092}")
     private String bootstrapServers;
 
     /**
@@ -45,11 +45,10 @@ public class KafkaConfig {
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         config.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
         config.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
-        config.put(JsonDeserializer.VALUE_DEFAULT_TYPE, DefaultKafkaError.class);
+        config.put(JsonDeserializer.VALUE_DEFAULT_TYPE, JobMessage.class);
         // only read new messages
 
-        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),
-                new JsonDeserializer<>(JobMessage.class));
+        return new DefaultKafkaConsumerFactory<>(config);
     }
 
     @Bean

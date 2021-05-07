@@ -2,6 +2,7 @@ package de.evoila.cf.notification.repository;
 
 import de.evoila.cf.notification.model.SMTPConfig;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Map;
 public interface SMTPConfigRepository {
 
     void save(SMTPConfig smtpConfig);
-    Map<String, SMTPConfig> findAll();
+    List<SMTPConfig> findAll();
     SMTPConfig findById(String id);
     void update(SMTPConfig smtpConfig);
     void delete(String id);
