@@ -5,7 +5,9 @@ import de.evoila.cf.notification.model.DefaultKafkaError;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -25,8 +27,8 @@ public class KafkaConfig {
 
     private String topicName = "backup-job";
 
-    @Value("${spring.kafka.consumer.bootstrap-servers:localhost:9092}")
-    private String bootstrapServers;
+    @Autowired
+    private KafkaProperties kafkaProperties;
 
     /**
      * Configure a JobMessage ConsumerFactory. JSON data from the Kafka stream will be converted into objects.
@@ -34,9 +36,8 @@ public class KafkaConfig {
      */
     @Bean
     public ConsumerFactory<String, JobMessage> jobMessageConsumerFactory() {
-        Map<String, Object> config = new HashMap<>();
+        Map<String, Object> config = kafkaProperties.buildConsumerProperties();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "jobMessage_json");
         config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
@@ -59,10 +60,8 @@ public class KafkaConfig {
     }
 
     @Bean
-    public NewTopic topic() {
+    public NewTopic backupJob() {
         return TopicBuilder.name(topicName)
-                .partitions(10)
-                .replicas(1)
                 .build();
     }
 }

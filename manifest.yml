@@ -1,0 +1,20 @@
+applications:
+- name: osb-backup-notification-service-test
+  buildpacks:
+  - java_buildpack
+  disk_quota: 1G
+  env:
+    JAVA_OPTS: -Djava.security.egd=file:/dev/urandom
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+}}'
+    LOGGING_LEVEL_ROOT: INFO
+    SPRING_APPLICATION_NAME: osb-evoila-test
+    SPRING_CLOUD_CONFIG_URI: https://config-server-test.system.cf.hob.local
+    SPRING_CONFIG_IMPORT: optional:configserver:https://config-server-test.system.cf.hob.local
+    SPRING_PROFILES_ACTIVE: backup-notification-service,credhub,backend-kafka
+  instances: 1
+  memory: 1G
+  routes:
+  - route: osb-backup-notification-service-test.system.cf.hob.local
+  stack: cflinuxfs3
+  timeout: 180
+  path: osb-backup-notification-service/target/osb-backup-notification-service-0.0.1-SNAPSHOT.jar
