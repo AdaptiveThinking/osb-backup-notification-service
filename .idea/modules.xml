@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/osb-core/core/core.iml" filepath="$PROJECT_DIR$/osb-core/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/osb-core/core-parent.iml" filepath="$PROJECT_DIR$/osb-core/core-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/osb-core/model/model.iml" filepath="$PROJECT_DIR$/osb-core/model/model.iml" />
       <module fileurl="file://$PROJECT_DIR$/osb-backup-notification-service/osb-backup-notification-service.iml" filepath="$PROJECT_DIR$/osb-backup-notification-service/osb-backup-notification-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/repo-parent.iml" filepath="$PROJECT_DIR$/repo-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/osb-core/security/security.iml" filepath="$PROJECT_DIR$/osb-core/security/security.iml" />
     </modules>
   </component>
 </project>

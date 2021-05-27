@@ -16,6 +16,7 @@
     </parent>
 
     <modules>
+        <module>osb-core</module>
         <module>osb-backup-notification-service</module>
     </modules>
 

@@ -8,16 +8,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="osb-backup-notification-service" />
+        <module name="core" />
+        <module name="model" />
+        <module name="security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="core" target="11" />
+      <module name="core-parent" target="11" />
+      <module name="model" target="11" />
       <module name="osb-backup-notification-service" target="11" />
       <module name="repo-parent" target="11" />
+      <module name="security" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="core" options="-parameters --add-exports java.base/sun.security.util=ALL-UNNAMED" />
+      <module name="model" options="-parameters --add-exports java.base/sun.security.util=ALL-UNNAMED" />
       <module name="osb-backup-notification-service" options="-parameters --add-exports java.base/sun.security.util=ALL-UNNAMED" />
+      <module name="security" options="-parameters --add-exports java.base/sun.security.util=ALL-UNNAMED" />
     </option>
   </component>
 </project>
