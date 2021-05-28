@@ -1,5 +1,10 @@
+login:
+  username: "hello"
+  password: "world"
+  role: "USER"
 spring:
   kafka:
+    bootstrap-servers: localhost:9092
     properties:
       security:
         protocol: SASL_PLAINTEXT
@@ -7,8 +12,6 @@ spring:
         mechanism: PLAIN
         jaas:
           config: org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret";
-    consumer:
-      bootstrap-servers: localhost:9092
   redis:
     host: localhost
     port: 16379

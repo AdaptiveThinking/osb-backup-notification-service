@@ -1,3 +1,7 @@
+login:
+  username: "hello"
+  password: "world"
+  role: "USER"
 spring:
   kafka:
     properties:
