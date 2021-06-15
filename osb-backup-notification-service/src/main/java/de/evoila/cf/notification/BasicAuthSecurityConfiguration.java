@@ -37,8 +37,8 @@ public class BasicAuthSecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().authenticated()
-                .and().httpBasic()
+                .anyRequest().authenticated() // any request needs to be authenticated
+                .and().httpBasic() // auth data can be send via http header
                 .and().anonymous().disable().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
                 .and().csrf().disable();
     }

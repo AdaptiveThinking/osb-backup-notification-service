@@ -20,9 +20,9 @@ public class KafkaJobListener {
     @Autowired
     private EmailNotificationConfigRepositoryImpl emailNotificationConfigRepository;
 
-
     @KafkaListener(topics = "backup-job", groupId = "jobMessage_json", containerFactory = "jobMessageKafkaListenerFactory")
     public void listen(JobMessage jobMessage) {
+        System.out.println("Received message: Instance " + jobMessage.getServiceInstanceId() + " with status " + jobMessage.getJobStatus());
 
         List<EmailNotificationConfig> list = emailNotificationConfigRepository.findAllByInstance(jobMessage.getServiceInstanceId());
 

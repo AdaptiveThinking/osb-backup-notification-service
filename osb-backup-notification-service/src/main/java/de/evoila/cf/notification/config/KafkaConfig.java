@@ -27,8 +27,11 @@ public class KafkaConfig {
 
     private String topicName = "backup-job";
 
-    @Autowired
     private KafkaProperties kafkaProperties;
+
+    public KafkaConfig (KafkaProperties kafkaProperties){
+        this.kafkaProperties = kafkaProperties;
+    }
 
     /**
      * Configure a JobMessage ConsumerFactory. JSON data from the Kafka stream will be converted into objects.

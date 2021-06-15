@@ -13,6 +13,7 @@ spring:
         jaas:
           config: org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret";
   redis:
+    cluster:
+      nodes: localhost:6379
     host: localhost
-    port: 16379
-    password: admin-secret
+    port: 6379
