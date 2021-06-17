@@ -5,6 +5,8 @@ import de.evoila.cf.notification.model.EmailNotificationConfig;
 import de.evoila.cf.notification.model.JobMessage;
 import de.evoila.cf.notification.repository.EmailNotificationConfigRepositoryImpl;
 import de.evoila.cf.notification.service.MailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -15,6 +17,8 @@ import java.util.Map;
 
 @Component
 public class KafkaJobListener {
+
+    Logger logger = LoggerFactory.getLogger(KafkaJobListener.class);
 
     @Autowired
     private MailService mailService;
@@ -30,6 +34,10 @@ public class KafkaJobListener {
 
         for (EmailNotificationConfig emailNotificationConfig : list) {
             if (emailNotificationConfig.getTriggerOn() == jobMessage.getJobStatus()) {
+                logger.debug("EmailNotificationConfig "
+                        + emailNotificationConfig.getId()
+                        + " sending Email with SMTPConfig "
+                        + emailNotificationConfig.getSmtpConfigId());
                 mailService.sendEmail(emailNotificationConfig, jobMessage);
             }
         }

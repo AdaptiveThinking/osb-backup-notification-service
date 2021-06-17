@@ -5,6 +5,8 @@ import de.evoila.cf.notification.model.SMTPConfig;
 import de.evoila.cf.notification.model.JobMessage;
 import de.evoila.cf.notification.model.Mail;
 import de.evoila.cf.notification.repository.SMTPConfigRepositoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -23,6 +25,8 @@ import java.util.Properties;
 
 @Service
 public class MailService {
+
+    Logger logger = LoggerFactory.getLogger(MailService.class);
 
     @Autowired
     private SMTPConfigRepositoryImpl smtpConfigRepository;
@@ -45,6 +49,7 @@ public class MailService {
     public boolean sendEmail(EmailNotificationConfig emailNotificationConfig, JobMessage jobMessage) {
 
         SMTPConfig smtpConfig = smtpConfigRepository.findById(emailNotificationConfig.getSmtpConfigId());
+
         if(smtpConfig != null){
             Mail mail = createMail(emailNotificationConfig,jobMessage);
             String htmlContent = getHtmlContent(mail);
@@ -69,6 +74,14 @@ public class MailService {
             javaMailSender.send(message);
             return true;
         }
+
+        logger.error("NotificationConfiguration " +
+                emailNotificationConfig.getId() +
+                " tried accessing SMTPConfiguration " +
+                emailNotificationConfig.getSmtpConfigId() +
+                ". The SMTPConfiguration could not be fetched from the database. " +
+                "It's likely that the SMTPConfiguration was never created or removed at some point.");
+
         return false;
     }
 
