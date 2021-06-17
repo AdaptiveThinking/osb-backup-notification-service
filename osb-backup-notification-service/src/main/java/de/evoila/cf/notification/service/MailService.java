@@ -45,28 +45,31 @@ public class MailService {
     public boolean sendEmail(EmailNotificationConfig emailNotificationConfig, JobMessage jobMessage) {
 
         SMTPConfig smtpConfig = smtpConfigRepository.findById(emailNotificationConfig.getSmtpConfigId());
-        Mail mail = createMail(emailNotificationConfig,jobMessage);
-        String htmlContent = getHtmlContent(mail);
-        JavaMailSender javaMailSender = getJavaMailSender(smtpConfig);
-        MimeMessage message = javaMailSender.createMimeMessage();
+        if(smtpConfig != null){
+            Mail mail = createMail(emailNotificationConfig,jobMessage);
+            String htmlContent = getHtmlContent(mail);
+            JavaMailSender javaMailSender = getJavaMailSender(smtpConfig);
+            MimeMessage message = javaMailSender.createMimeMessage();
 
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(message,
-                    MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-                    StandardCharsets.UTF_8.name());
+            try {
+                MimeMessageHelper helper = new MimeMessageHelper(message,
+                        MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                        StandardCharsets.UTF_8.name());
 
-            helper.setFrom(mail.getFrom());
-            helper.setTo(mail.getTo());
-            helper.setSubject(mail.getSubject());
-            helper.setText(htmlContent, true);
+                helper.setFrom(mail.getFrom());
+                helper.setTo(mail.getTo());
+                helper.setSubject(mail.getSubject());
+                helper.setText(htmlContent, true);
 
-        } catch (MessagingException ex) {
-            ex.printStackTrace();
-            return false;
+            } catch (MessagingException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+
+            javaMailSender.send(message);
+            return true;
         }
-
-        javaMailSender.send(message);
-        return true;
+        return false;
     }
 
     /**

@@ -17,9 +17,6 @@ import java.util.Map;
 public class KafkaJobListener {
 
     @Autowired
-    private Acknowledgment acknowledgment;
-
-    @Autowired
     private MailService mailService;
 
     @Autowired
@@ -28,7 +25,7 @@ public class KafkaJobListener {
     @KafkaListener(topics = KafkaConfiguration.TOPIC_NAME,
             groupId = KafkaConfiguration.CONSUMER_GROUP,
             containerFactory = "jobMessageKafkaListenerFactory")
-    public void listen(JobMessage jobMessage) {
+    public void listen(JobMessage jobMessage, Acknowledgment acknowledgment) {
         List<EmailNotificationConfig> list = emailNotificationConfigRepository.findAllByInstance(jobMessage.getServiceInstanceId());
 
         for (EmailNotificationConfig emailNotificationConfig : list) {
