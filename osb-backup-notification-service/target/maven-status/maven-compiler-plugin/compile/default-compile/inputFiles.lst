@@ -1,12 +1,14 @@
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/OsbBackupNotificationServiceApplication.java
+/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/RedisConfiguration.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/controller/SMTPConfigurationController.java
-/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/ThymeleafTemplateConfig.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/repository/SMTPConfigRepositoryImpl.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/model/enums/JobStatus.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/BasicAuthSecurityConfiguration.java
+/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/SpringFoxConfiguration.java
+/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/KafkaConfiguration.java
+/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/ThymeleafTemplateConfiguration.java
+/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/UAASecurityConfiguration.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/model/JobMessage.java
-/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/KafkaConfig.java
-/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/SpringFoxConfig.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/service/MailService.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/controller/EmailNotificationController.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/model/EmailNotificationConfig.java
@@ -15,7 +17,6 @@
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/repository/EmailNotificationConfigRepository.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/repository/SMTPConfigRepository.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/BaseAuthenticationConfiguration.java
-/Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/config/RedisConfig.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/model/DefaultKafkaError.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/listener/KafkaJobListener.java
 /Users/thomasquandt/evoila/projects/osb/osb-backup-notification-service/osb-backup-notification-service/src/main/java/de/evoila/cf/notification/model/Mail.java

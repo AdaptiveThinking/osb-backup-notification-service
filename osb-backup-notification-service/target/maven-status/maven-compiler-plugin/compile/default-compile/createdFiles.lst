@@ -8,6 +8,7 @@ de/evoila/cf/notification/model/SMTPConfig.class
 de/evoila/cf/notification/repository/EmailNotificationConfigRepository.class
 de/evoila/cf/notification/model/JobMessage.class
 de/evoila/cf/notification/model/Mail.class
+de/evoila/cf/notification/UAASecurityConfiguration.class
 de/evoila/cf/notification/OsbBackupNotificationServiceApplication.class
 de/evoila/cf/notification/config/BaseAuthenticationConfiguration.class
 de/evoila/cf/notification/listener/KafkaJobListener.class
